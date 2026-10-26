@@ -1,0 +1,53 @@
+.kb-main { --maxw: 1320px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.kb-bar { padding: 12px 14px; }
+.kb-pick { min-width: 180px; }
+.kb-board-btns { align-self: end; }
+.kb-search { width: 200px; }
+@media (max-width: 760px) { .kb-search { width: 100%; } }
+
+.board { display: flex; gap: 12px; align-items: flex-start; overflow-x: auto; padding: 2px 2px 14px; scroll-snap-type: x proximity; overscroll-behavior-x: contain; }
+.col {
+  flex: 0 0 272px; max-width: 86vw; display: flex; flex-direction: column; gap: 8px; padding: 10px; border-radius: 16px;
+  background: var(--surface); border: 1px solid var(--line); scroll-snap-align: start;
+}
+.col-head { display: flex; align-items: center; gap: 6px; }
+.col-name { flex: 1; min-width: 0; font: 650 14.5px var(--font); background: transparent; border: 1px solid transparent; border-radius: 8px; padding: 5px 7px; color: var(--text); }
+.col-name:hover { border-color: var(--line); }
+.col-name:focus { border-color: var(--accent); background: var(--surface-2); }
+.cards { display: flex; flex-direction: column; gap: 8px; min-height: 44px; }
+.col-empty { display: grid; place-items: center; min-height: 64px; border: 1.5px dashed var(--line-strong); border-radius: 12px; color: var(--text-3); font-size: 12.5px; }
+
+.kcard {
+  position: relative; display: grid; gap: 6px; padding: 10px 12px 10px 14px; border-radius: 12px; cursor: grab; user-select: none;
+  background: var(--surface-2); border: 1px solid var(--line); transition: border-color var(--dur), box-shadow var(--dur), transform 120ms;
+}
+.kcard:hover { border-color: var(--line-strong); }
+.kcard:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.kcard::before { content: ""; position: absolute; left: 0; top: 10px; bottom: 10px; width: 4px; border-radius: 0 4px 4px 0; background: var(--lbl, transparent); }
+.k-top { display: flex; gap: 8px; align-items: flex-start; }
+.k-title { flex: 1; font-weight: 600; line-height: 1.35; overflow-wrap: anywhere; }
+.grip { color: var(--text-3); font-size: 16px; line-height: 1; padding: 2px 4px; margin: -2px -6px 0 0; border-radius: 6px; cursor: grab; touch-action: none; }
+.k-notes { margin: 0; color: var(--text-2); font-size: 12.5px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; }
+.k-due { justify-self: start; font-size: 11.5px; padding: 2px 8px; }
+.k-due.overdue { color: var(--danger); background: var(--danger-soft); border-color: transparent; }
+.k-due.today { color: var(--warn); }
+.k-due.soon { color: var(--accent); }
+.c-red { --lbl: #ef5b5b; } .c-orange { --lbl: #f59340; } .c-yellow { --lbl: #e9c23b; }
+.c-green { --lbl: #3fbf77; } .c-blue { --lbl: #4c8dff; } .c-purple { --lbl: #a26bf5; }
+
+.add-wrap .add-card { width: 100%; justify-content: flex-start; color: var(--text-3); }
+.add-wrap .add-card kbd { margin-left: auto; }
+.add-wrap .quick { min-height: 64px; resize: vertical; font-family: var(--font); }
+
+.placeholder { border: 1.5px dashed var(--accent); border-radius: 12px; background: var(--accent-soft); }
+.drag-ghost { position: fixed; left: 0; top: 0; z-index: 70; pointer-events: none; box-shadow: var(--shadow-pop); cursor: grabbing; opacity: .96; }
+body.is-dragging, body.is-dragging * { cursor: grabbing !important; user-select: none; }
+
+.kb-dlg { width: min(520px, calc(100vw - 32px)); padding: 22px; border: 0; border-radius: 20px; background: var(--surface); color: var(--text); box-shadow: var(--shadow-pop); }
+.kb-dlg::backdrop { background: rgba(0, 0, 0, .55); }
+.labels { border: 0; padding: 0; margin: 0; }
+.labels legend { font-size: 12.5px; font-weight: 600; color: var(--text-2); margin-bottom: 6px; padding: 0; }
+.swatch { width: 30px; height: 30px; border-radius: 50%; background: var(--lbl); border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--line-strong); }
+.swatch.none { background: linear-gradient(135deg, transparent 46%, var(--text-3) 46% 54%, transparent 54%), var(--surface-2); }
+.swatch[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--accent); }

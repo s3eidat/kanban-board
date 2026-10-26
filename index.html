@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' data: blob:; connect-src 'self' data: blob:; worker-src 'self' blob:; manifest-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Kanban Board — Free Private Kanban, No Sign-up | S3eidat Tools</title>
+<meta name="description" content="A simple, private Kanban board in your browser: multiple boards, columns, cards with notes, colour labels and due dates, drag and drop (mouse and touch), search, JSON export. Free, no sign-up.">
+<meta property="og:title" content="Kanban Board — simple, private, no sign-up">
+<meta property="og:description" content="Boards, columns and cards with drag and drop. Everything stays in your browser.">
+<meta property="og:image" content="screenshot.png">
+<link rel="icon" href="kit/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="kit/kit.css">
+<link rel="stylesheet" href="app.css">
+<script src="kit/kit.js"></script>
+</head>
+<body data-tool="kanban-board">
+<main class="s3-main kb-main">
+  <section class="s3-hero">
+    <h1>Kanban Board</h1>
+    <p>Plan anything with columns and cards. Drag cards between columns with a mouse or your finger. Your boards are saved in this browser only.</p>
+    <div class="s3-badges"><span class="chip accent"><svg class="i"><use href="#i-lock"/></svg>Stored in this browser only</span><span class="chip">Drag &amp; drop, touch too</span><span class="chip">Multiple boards</span></div>
+  </section>
+
+  <section class="card kb-bar">
+    <div class="row">
+      <label class="field kb-pick">Board<select class="select" id="boardPick"></select></label>
+      <div class="row kb-board-btns">
+        <button class="btn small" id="boardNew"><svg class="i"><use href="#i-plus"/></svg>Board</button>
+        <button class="btn small ghost" id="boardRename">Rename</button>
+        <button class="btn small ghost danger" id="boardDel"><svg class="i"><use href="#i-trash"/></svg>Delete</button>
+      </div>
+      <span class="grow"></span>
+      <label class="kb-search"><span class="sr">Search cards</span><input class="input" type="search" id="q" placeholder="Search cards" dir="auto"></label>
+      <button class="btn small" id="colAdd"><svg class="i"><use href="#i-plus"/></svg>Column</button>
+      <button class="btn small ghost" id="exp"><svg class="i"><use href="#i-download"/></svg>Export</button>
+      <label class="btn small ghost" id="imp"><svg class="i"><use href="#i-upload"/></svg>Import<input type="file" accept=".json,application/json" hidden></label>
+    </div>
+  </section>
+
+  <div class="board mt" id="board" aria-label="Board columns"></div>
+  <p class="faint mt">Tip: click a card to edit it. On a phone, drag cards by their ⠿ handle. Press <kbd>N</kbd> to add a card to the first column.</p>
+</main>
+
+<dialog class="kb-dlg" id="dlg" aria-labelledby="dlgTitle">
+  <div class="stack" id="dlgForm">
+    <div class="row between"><h2 id="dlgTitle">Edit card</h2><button class="btn ghost icon small" data-act="cancel" aria-label="Close"><svg class="i"><use href="#i-x"/></svg></button></div>
+    <label class="field">Title<input class="input" id="fTitle" dir="auto" maxlength="300"></label>
+    <label class="field">Notes<textarea class="textarea prose" id="fNotes" dir="auto" rows="5" maxlength="5000"></textarea></label>
+    <div class="grid-2">
+      <label class="field">Due date<input class="input" type="date" id="fDue"></label>
+      <label class="field">Column<select class="select" id="fCol"></select></label>
+    </div>
+    <fieldset class="labels"><legend>Label</legend><div class="row" id="fColors"></div></fieldset>
+    <div class="row">
+      <button class="btn ghost danger" data-act="delete" id="fDel"><svg class="i"><use href="#i-trash"/></svg>Delete card</button>
+      <span class="grow"></span>
+      <button class="btn" data-act="cancel">Cancel</button>
+      <button class="btn primary" data-act="save" id="fSave">Save</button>
+    </div>
+  </div>
+</dialog>
+<script src="app.js"></script>
+</body>
+</html>
